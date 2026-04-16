@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CS Foundations Visualizer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <div class="category">
+                <button class="menu-btn">Cat 1</button>
+                <button class="menu-btn">Cat 2</button>
+                <button class="menu-btn">Cat 3</button>
+            </div>
+        </div>
+
+        <main class="content">
+            <header>
+                <h1 id="algo-title">Select an Algorithm</h1>
+            </header>
+
+            <section class="visualizer-container">
+                <div id="visualizer-canvas"></div>
+                <div id="code-display">
+                    <pre><code>Code will appear here...</code></pre>
+                </div>
+            </section>
+
+            <section class="controls">
+                <button id="start-btn">Start</button>
+                <button id="stop-btn">Stop</button>
+                <button id="reset-btn">Reset</button>
+            </section>
+
+            <section class="info-panel">
+                <h3>Big O & Summary</h3>
+                <p class="content-info">Please select an algorithm to see its details.</p>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
