@@ -11,31 +11,31 @@
         <div class="sidebar">
             <h2>Categories</h2>
 
-                <div class="category">
-                    <h4 class="category-label">Sorting</h4>
-                    <button class="menu-btn" onclick="selectAlgo('bubble')">Bubble Sort</button>
-                    <button class="menu-btn" onclick="selectAlgo('selection')">Selection Sort</button>
-                    <button class="menu-btn" onclick="selectAlgo('merge')">Merge Sort</button>
-                    <button class="menu-btn" onclick="selectAlgo('quick')">Quick Sort</button>
-                    <button class="menu-btn" onclick="selectAlgo('heap-sort')">Heap Sort</button>
-                </div>
+            <div class="category">
+                <h4 class="category-label">Sorting</h4>
+                <button class="menu-btn" onclick="selectAlgo('bubble')">Bubble Sort</button>
+                <button class="menu-btn" onclick="selectAlgo('selection')">Selection Sort</button>
+                <button class="menu-btn" onclick="selectAlgo('merge')">Merge Sort</button>
+                <button class="menu-btn" onclick="selectAlgo('quick')">Quick Sort</button>
+                <button class="menu-btn" onclick="selectAlgo('heap-sort')">Heap Sort</button>
+            </div>
 
-                <div class="category">
-                    <h4 class="category-label">Searching & Path</h4>
-                    <button class="menu-btn" onclick="selectAlgo('linear')">Linear Search</button>
-                    <button class="menu-btn" onclick="selectAlgo('binary')">Binary Search</button>
-                    <button class="menu-btn" onclick="selectAlgo('bfs')">BFS / DFS</button>
-                    <button class="menu-btn" onclick="selectAlgo('dijkstra')">Dijkstra's</button>
-                </div>
+            <div class="category">
+                <h4 class="category-label">Searching & Path</h4>
+                <button class="menu-btn" onclick="selectAlgo('linear')">Linear Search</button>
+                <button class="menu-btn" onclick="selectAlgo('binary')">Binary Search</button>
+                <button class="menu-btn" onclick="selectAlgo('bfs')">BFS / DFS</button>
+                <button class="menu-btn" onclick="selectAlgo('dijkstra')">Dijkstra's</button>
+            </div>
 
-                <div class="category">
-                    <h4 class="category-label">Data Structures</h4>
-                    <button class="menu-btn" onclick="selectAlgo('linked-list')">Linked List</button>
-                    <button class="menu-btn" onclick="selectAlgo('stack-queue')">Stacks & Queues</button>
-                    <button class="menu-btn" onclick="selectAlgo('hashmap')">HashMap (Hashing)</button>
-                    <button class="menu-btn" onclick="selectAlgo('heap')">Max/Min Heap</button>
-                    <button class="menu-btn" onclick="selectAlgo('bst')">Binary Search Tree</button>
-                </div>
+            <div class="category">
+                <h4 class="category-label">Data Structures</h4>
+                <button class="menu-btn" onclick="selectAlgo('linked-list')">Linked List</button>
+                <button class="menu-btn" onclick="selectAlgo('stack-queue')">Stacks & Queues</button>
+                <button class="menu-btn" onclick="selectAlgo('hashmap')">HashMap (Hashing)</button>
+                <button class="menu-btn" onclick="selectAlgo('heap')">Max/Min Heap</button>
+                <button class="menu-btn" onclick="selectAlgo('bst')">Binary Search Tree</button>
+            </div>
         </div>
 
         <main class="content">
@@ -46,32 +46,48 @@
             <section class="visualizer-container">
                 <div id="visualizer-canvas"></div>
                 <div id="code-display">
-                    <pre><code>Code will appear here...</code></pre>
+                    <pre><code id="code-root">Code will appear here...</code></pre>
                 </div>
             </section>
 
             <section class="controls">
-                <button id="start-btn">Start</button>
-                <button id="stop-btn">Stop</button>
-                <button id="reset-btn">Reset</button>
+                <div class="controls-wrapper">
+                    <div class="control-buttons">
+                        <button id="start-btn">Start</button>
+                        <button id="pause-btn">Pause</button>
+                        <button id="reset-btn">Reset</button>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="speed-slider">Speed</label>
+                        <input type="range" id="speed-slider" min="100" max="1000" value="400" step="50">
+                    </div>
+                </div>
             </section>
 
             <section class="info-panel">
-                <h3>Summary</h3>
-                <p class="content-info">Please select an algorithm to see its details.</p>
+                <div class="summary-box">
+                    <h3>Summary</h3>
+                    <p class="content-info">Please select an algorithm to see its details.</p>
+                </div>
             </section>
         </main>
-        
     </div>
+
     <footer>
         <div id="footer-flex">
             <div id="footer-socials">
-                <a href="https://github.com/MichaelHallamCS" target="_blank"><img id='github-icon' src="assets/github_logo.png" alt="GitHub Logo"></a>
-                <a href="https://www.linkedin.com/in/michael-hallam-b1a54635b/" target="_blank"><img id='linkedin-icon' src="assets/linkedin_logo.png" alt="LinkedIn Logo"></a>
+                <a href="https://github.com/MichaelHallamCS" target="_blank">
+                    <img id='github-icon' src="assets/github_logo.png" alt="GitHub Logo">
+                </a>
+                <a href="https://www.linkedin.com/in/michael-hallam-b1a54635b/" target="_blank">
+                    <img id='linkedin-icon' src="assets/linkedin_logo.png" alt="LinkedIn Logo">
+                </a>
             </div>
             <p id="footer-copyright">Michael Hallam &copy;2026</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <script type="module" src="main.js"></script>
 </body>
 </html>

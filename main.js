@@ -1,0 +1,129 @@
+import { bubbleSort, bubbleInfo } from './algorithms/sorting/bubbleSort.js';
+
+const canvas = document.getElementById('visualizer-canvas');
+const startBtn = document.getElementById('start-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const resetBtn = document.getElementById('reset-btn');
+const speedSlider = document.getElementById('speed-slider');
+const codeRoot = document.getElementById('code-root');
+const titleDisplay = document.getElementById('algo-title');
+const infoDisplay = document.querySelector('.content-info');
+
+let currentAlgo = null;
+let isSorting = false;
+let isPaused = false;
+
+const FIXED_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
+
+/**
+ * Helper: Sleep function using Promises
+ * @param {number} ms - milliseconds to sleep
+ */
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+/**
+ * Renders the bar chart based on an array
+ * @param {Array} arr - The data to visualize
+ */
+function generateBars(arr = FIXED_ARRAY) {
+    canvas.innerHTML = '';
+    arr.forEach(value => {
+        const bar = document.createElement('div');
+        bar.style.height = `${value}%`;
+        bar.style.width = '35px';
+        bar.style.backgroundColor = 'var(--accent-color)';
+        bar.classList.add('bar');
+        
+        const label = document.createElement('span');
+        label.innerText = value;
+        label.style.color = 'var(--text-main)';
+        label.style.fontSize = '12px';
+        label.style.marginBottom = '5px';
+        
+        bar.appendChild(label);
+        canvas.appendChild(bar);
+    });
+}
+
+/**
+ * Manages the visual highlighting of the pseudocode lines
+ * @param {number} lineIndex - The index of the code array to highlight
+ */
+function highlightLine(lineIndex) {
+    const lines = document.querySelectorAll('.code-line');
+    lines.forEach((line, idx) => {
+        if (idx === lineIndex) {
+            line.style.backgroundColor = "#334155";
+            line.style.color = "#60a5fa";
+            line.style.borderLeft = "3px solid #60a5fa";
+        } else {
+            line.style.backgroundColor = "transparent";
+            line.style.color = "var(--text-dim)";
+            line.style.borderLeft = "3px solid transparent";
+        }
+    });
+}
+
+
+window.selectAlgo = (algoId) => {
+    isSorting = false;
+    isPaused = false;
+    pauseBtn.innerText = "Pause";
+    
+    if (algoId === 'bubble') {
+        currentAlgo = 'bubble';
+        document.getElementById('algo-title').innerText = bubbleInfo.title;
+        
+        document.querySelector('.content-info').innerHTML = `
+            <p>${bubbleInfo.description}</p>
+            <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${bubbleInfo.bigO}
+            </p>
+        `;
+        
+        codeRoot.innerHTML = bubbleInfo.codeArr
+            .map(line => `<div class="code-line">${line}</div>`)
+            .join('');
+            
+        generateBars();
+    }
+};
+
+
+startBtn.onclick = async () => {
+    if (isSorting || !currentAlgo) return;
+    
+    isSorting = true;
+    isPaused = false;
+    pauseBtn.innerText = "Pause";
+    
+    const bars = document.querySelectorAll('.bar');
+    
+    if (currentAlgo === 'bubble') {
+        await bubbleSort(
+            bars, 
+            sleep, 
+            () => isSorting, 
+            () => (1100 - speedSlider.value), 
+            () => isPaused, 
+            highlightLine
+        );
+    }
+    
+    isSorting = false;
+};
+
+pauseBtn.onclick = () => {
+    if (isSorting) {
+        isPaused = !isPaused;
+        pauseBtn.innerText = isPaused ? "Resume" : "Pause";
+    }
+};
+
+resetBtn.onclick = () => {
+    isSorting = false;
+    isPaused = false;
+    pauseBtn.innerText = "Pause";
+    generateBars();
+    highlightLine(-1);
+};
