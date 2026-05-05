@@ -36,9 +36,6 @@ function generateBars(arr = FIXED_ARRAY) {
         
         const label = document.createElement('span');
         label.innerText = value;
-        label.style.color = 'var(--text-main)';
-        label.style.fontSize = '12px';
-        label.style.marginBottom = '5px';
         
         bar.appendChild(label);
         canvas.appendChild(bar);

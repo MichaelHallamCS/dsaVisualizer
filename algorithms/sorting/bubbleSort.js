@@ -57,13 +57,13 @@ export async function bubbleSort(bars, delay, getIsSorting, getSpeed, getIsPause
 export const bubbleInfo = {
     title: "Bubble Sort",
     description: "A comparison based algorithm that repeatedly swaps adjacent elements if they are in the incorrect order. The largest values gradually bubble to the end of the list.",
-    bigO: "Worst: O(n^2) | Best: O(n)",
+    bigO: "Worst: O(n&sup2;) | Best: O(n)",
     codeArr: [
         "function bubbleSort(arr) {",
         "  for (let i = 0; i < arr.length; i++) {",
         "    for (let j = 0; j < arr.length-i-1; j++) {",
         "      if (arr[j] > arr[j+1]) {",
-        "        swap(arr[j], arr[j+1]);",
+        "        [arr[j], arr[j+1]] = [arr[j+1], arr[j]];",
         "      }",
         "    }",
         "  }",
