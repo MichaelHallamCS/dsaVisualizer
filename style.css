@@ -190,10 +190,7 @@ header h1 {
 }
 
 #start-btn { background-color: var(--success); }
-#pause-btn { 
-    background-color: var(--warning); 
-    min-width: 110px;
-}
+
 #reset-btn { background-color: var(--danger); }
 
 .slider-group {

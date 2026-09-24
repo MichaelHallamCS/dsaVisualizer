@@ -2,7 +2,6 @@ import { bubbleSort, bubbleInfo } from './algorithms/sorting/bubbleSort.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
-const pauseBtn = document.getElementById('pause-btn');
 const resetBtn = document.getElementById('reset-btn');
 const speedSlider = document.getElementById('speed-slider');
 const codeRoot = document.getElementById('code-root');
@@ -11,7 +10,6 @@ const infoDisplay = document.querySelector('.content-info');
 
 let currentAlgo = null;
 let isSorting = false;
-let isPaused = false;
 
 const FIXED_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
 
@@ -64,8 +62,6 @@ function highlightLine(lineIndex) {
 
 window.selectAlgo = (algoId) => {
     isSorting = false;
-    isPaused = false;
-    pauseBtn.innerText = "Pause";
     
     if (algoId === 'bubble') {
         currentAlgo = 'bubble';
@@ -91,8 +87,6 @@ startBtn.onclick = async () => {
     if (isSorting || !currentAlgo) return;
     
     isSorting = true;
-    isPaused = false;
-    pauseBtn.innerText = "Pause";
     
     const bars = document.querySelectorAll('.bar');
     
@@ -101,8 +95,7 @@ startBtn.onclick = async () => {
             bars, 
             sleep, 
             () => isSorting, 
-            () => (1100 - speedSlider.value), 
-            () => isPaused, 
+            () => (1100 - speedSlider.value),  
             highlightLine
         );
     }
@@ -110,17 +103,8 @@ startBtn.onclick = async () => {
     isSorting = false;
 };
 
-pauseBtn.onclick = () => {
-    if (isSorting) {
-        isPaused = !isPaused;
-        pauseBtn.innerText = isPaused ? "Resume" : "Pause";
-    }
-};
-
 resetBtn.onclick = () => {
     isSorting = false;
-    isPaused = false;
-    pauseBtn.innerText = "Pause";
     generateBars();
     highlightLine(-1);
 };

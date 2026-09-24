@@ -5,10 +5,9 @@
  * @param {Function} delay - Sleep function (ms)
  * @param {Function} getIsSorting - Getter to check if execution should stop
  * @param {Function} getSpeed - Getter to retrieve current slider delay
- * @param {Function} getIsPaused - Getter to check if execution is suspended
  * @param {Function} highlight - Function to highlight the specific line of code
  */
-export async function bubbleSort(bars, delay, getIsSorting, getSpeed, getIsPaused, highlight) {
+export async function bubbleSort(bars, delay, getIsSorting, getSpeed, highlight) {
     for (let i = 0; i < bars.length; i++) {
         highlight(1); 
         await delay(getSpeed());
@@ -24,11 +23,6 @@ export async function bubbleSort(bars, delay, getIsSorting, getSpeed, getIsPause
 
             const val1 = parseInt(bars[j].querySelector('span').innerText);
             const val2 = parseInt(bars[j + 1].querySelector('span').innerText);
-
-            while (getIsPaused()) {
-                await delay(100);
-                if (!getIsSorting()) return; 
-            }
 
             highlight(3); 
             await delay(getSpeed());
