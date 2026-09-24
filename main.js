@@ -1,4 +1,5 @@
 import { bubbleSort, bubbleInfo } from './algorithms/sorting/bubbleSort.js';
+import {selectionSort, selectionInfo} from './algorithms/sorting/selectionSort.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -79,7 +80,21 @@ window.selectAlgo = (algoId) => {
             .join('');
             
         generateBars();
+    } else if (algoId === 'selection'){
+        currentAlgo = 'selection';
+        document.getElementById('algo-title').innerText = selectionInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+            <p>${selectionInfo.description}</p>
+            <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${selectionInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = selectionInfo.codeArr
+            .map(line => `<div class="code-line">${line}</div>`)
+            .join('');
+        generateBars();
     }
+    
 };
 
 
@@ -96,6 +111,14 @@ startBtn.onclick = async () => {
             sleep, 
             () => isSorting, 
             () => (1100 - speedSlider.value),  
+            highlightLine
+        );
+    } else if (currentAlgo === 'selection') {
+        await selectionSort(
+            bars,
+            sleep,
+            () => isSorting,
+            () => (1100 - speedSlider.value),
             highlightLine
         );
     }
