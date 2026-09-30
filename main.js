@@ -1,5 +1,6 @@
 import { bubbleSort, bubbleInfo } from './algorithms/sorting/bubbleSort.js';
 import {selectionSort, selectionInfo} from './algorithms/sorting/selectionSort.js';
+import {mergeSort, mergeInfo} from './algorithms/sorting/mergeSort.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -93,6 +94,19 @@ window.selectAlgo = (algoId) => {
             .map(line => `<div class="code-line">${line}</div>`)
             .join('');
         generateBars();
+    } else if (algoId === 'merge'){
+        currentAlgo = 'merge';
+        document.getElementById('algo-title').innerText = mergeInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+        <p>${mergeInfo.description}</p>
+            <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${mergeInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = mergeInfo.codeArr
+        .map(line => `<div class = "code-line">${line}</div>`)
+        .join('');
+        generateBars();
     }
     
 };
@@ -121,6 +135,9 @@ startBtn.onclick = async () => {
             () => (1100 - speedSlider.value),
             highlightLine
         );
+    } else if (currentAlgo === 'merge') {
+        await mergeSort(
+            bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine);
     }
     
     isSorting = false;
