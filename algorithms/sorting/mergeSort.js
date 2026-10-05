@@ -1,8 +1,174 @@
+export async function mergeSort(bars, delay, getIsSorting, getSpeed, highlight, arr, start = 0, end = bars.length - 1) {
+    highlight(0);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
 
+    highlight(1);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+    if (start >= end) return;
 
-export async function mergeSort(bars, delay, getIsSorting, getSpeed, highlight){
+    highlight(2);
+    const mid = Math.floor((start + end) / 2);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    highlight(3);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+    await mergeSort(bars, delay, getIsSorting, getSpeed, highlight, arr, start, mid);
+    if (!getIsSorting()) return;
+
+    highlight(4);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+    await mergeSort(bars, delay, getIsSorting, getSpeed, highlight, arr, mid + 1, end);
+    if (!getIsSorting()) return;
+
+    highlight(5);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+    await merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start, mid, end);
+    if (!getIsSorting()) return;
+
+    highlight(6);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    if (start === 0 && end === bars.length - 1) {
+        bars.forEach(b => b.style.backgroundColor = 'var(--success)');
+        highlight(-1);
+    }
+}
+
+async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start, mid, end) {
+    highlight(8);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    highlight(9);
+    const left = arr.slice(start, mid + 1);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    highlight(10);
+    const right = arr.slice(mid + 1, end + 1);
+    for (let x = start; x <= end; x++) bars[x].style.backgroundColor = 'var(--warning)';
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    highlight(11);
+    let i = 0, j = 0, k = start;
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    while (true) {
+        highlight(12);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        if (!(i < left.length && j < right.length)) break;
+
+        highlight(13);
+        bars[k].style.backgroundColor = 'var(--danger)';
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        if (left[i] <= right[j]) {
+            highlight(14);
+            arr[k] = left[i];
+            setBar(bars[k], arr[k]);
+            await delay(getSpeed());
+            if (!getIsSorting()) return;
+
+            highlight(15);
+            i++;
+            await delay(getSpeed());
+            if (!getIsSorting()) return;
+        } else {
+            highlight(16);
+            await delay(getSpeed());
+            if (!getIsSorting()) return;
+
+            highlight(17);
+            arr[k] = right[j];
+            setBar(bars[k], arr[k]);
+            await delay(getSpeed());
+            if (!getIsSorting()) return;
+
+            highlight(18);
+            j++;
+            await delay(getSpeed());
+            if (!getIsSorting()) return;
+        }
+
+        highlight(19);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        highlight(20);
+        bars[k].style.backgroundColor = 'var(--warning)';
+        k++;
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+    }
+
+    while (true) {
+        highlight(22);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        if (!(i < left.length)) break;
+
+        highlight(23);
+        arr[k] = left[i];
+        setBar(bars[k], arr[k]);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        highlight(24);
+        i++;
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        highlight(25);
+        k++;
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+    }
+
+    while (true) {
+        highlight(27);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        if (!(j < right.length)) break;
+
+        highlight(28);
+        arr[k] = right[j];
+        setBar(bars[k], arr[k]);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        highlight(29);
+        j++;
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+
+        highlight(30);
+        k++;
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+    }
+
+    highlight(32);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
 
 }
+
+function setBar(bar, value) {
+    bar.style.height = `${value}%`;
+    bar.querySelector('span').innerText = value;
+}
+        
 
 export const mergeInfo = {
     title: "Merge Sort",

@@ -7,8 +7,6 @@ const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const speedSlider = document.getElementById('speed-slider');
 const codeRoot = document.getElementById('code-root');
-const titleDisplay = document.getElementById('algo-title');
-const infoDisplay = document.querySelector('.content-info');
 
 let currentAlgo = null;
 let isSorting = false;
@@ -137,7 +135,7 @@ startBtn.onclick = async () => {
         );
     } else if (currentAlgo === 'merge') {
         await mergeSort(
-            bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine);
+            bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
     }
     
     isSorting = false;

@@ -99,7 +99,7 @@ header h1 {
 
 .visualizer-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
     min-height: 400px;
@@ -137,7 +137,7 @@ header h1 {
     border-radius: 12px;
     padding: 1rem;
     border: 1px solid #334155;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #code-root {
@@ -152,6 +152,7 @@ header h1 {
     color: var(--text-dim);
     transition: all 0.2s ease;
     white-space: pre;
+    border-left: 3px solid transparent;
 }
 
 .controls {
