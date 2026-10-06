@@ -107,7 +107,7 @@ window.selectAlgo = (algoId) => {
         .join('');
         generateBars();
     } else if (algoId === 'quick'){
-        currentAlgo === 'quick';
+        currentAlgo = 'quick';
         document.getElementById('algo-title').innerText = quickInfo.title;
         document.querySelector('.content-info').innerHTML = `
         <p>${quickInfo.description}</p>

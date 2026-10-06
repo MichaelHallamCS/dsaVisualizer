@@ -1,5 +1,32 @@
-export async function quickSort (bars, delay, getIsSorting, getSpeed, highlight) {
+export async function quickSort (bars, delay, getIsSorting, getSpeed, highlight, arr, low = 0, high = bars.length - 1) {
+    highlight(0);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
 
+    highlight(1);
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    if (low < high) {
+        highlight(2);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        const pi = partition(arr, low, high);
+
+        highlight(3);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        quickSort(arr, low, pi - 1);
+
+        highlight(4);
+        await delay(getSpeed());
+        if (!getIsSorting()) return;
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+async function partition(arr, low, high) {
+    
 }
 
 export const quickInfo = {
