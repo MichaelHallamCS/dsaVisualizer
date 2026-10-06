@@ -215,6 +215,10 @@ input[type="range"] {
     margin-top: 1rem;
 }
 
+.content-info{
+    padding-top: 0.5rem;
+}
+
 footer {
     min-height: 7vh;
     background-color: var(--sidebar-color);
