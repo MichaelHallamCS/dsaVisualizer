@@ -1,6 +1,7 @@
 import { bubbleSort, bubbleInfo } from './algorithms/sorting/bubbleSort.js';
 import {selectionSort, selectionInfo} from './algorithms/sorting/selectionSort.js';
 import {mergeSort, mergeInfo} from './algorithms/sorting/mergeSort.js';
+import {quickSort, quickInfo} from './algorithms/sorting/quickSort.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -105,6 +106,19 @@ window.selectAlgo = (algoId) => {
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
         generateBars();
+    } else if (algoId === 'quick'){
+        currentAlgo === 'quick';
+        document.getElementById('algo-title').innerText = quickInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+        <p>${quickInfo.description}</p>
+            <p style="margin-top: 1opx; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${quickInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = quickInfo.codeArr
+        .map(line => `<div class = "code-line">${line}</div>`)
+        .join('');
+        generateBars();
     }
     
 };
@@ -136,6 +150,8 @@ startBtn.onclick = async () => {
     } else if (currentAlgo === 'merge') {
         await mergeSort(
             bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
+    } else if (currentAlgo === 'quick') {
+        await quickSort(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine);
     }
     
     isSorting = false;

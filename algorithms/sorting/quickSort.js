@@ -1,4 +1,4 @@
-export async function quickSort () {
+export async function quickSort (bars, delay, getIsSorting, getSpeed, highlight) {
 
 }
 
