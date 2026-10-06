@@ -111,7 +111,7 @@ window.selectAlgo = (algoId) => {
         document.getElementById('algo-title').innerText = quickInfo.title;
         document.querySelector('.content-info').innerHTML = `
         <p>${quickInfo.description}</p>
-            <p style="margin-top: 1opx; color: var(--accent-color); font-weight: bold;">
+            <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
                 Complexity: ${quickInfo.bigO}
             </p>
         `;
