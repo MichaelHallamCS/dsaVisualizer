@@ -32,10 +32,6 @@ export async function mergeSort(bars, delay, getIsSorting, getSpeed, highlight, 
     await merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start, mid, end);
     if (!getIsSorting()) return;
 
-    highlight(6);
-    await delay(getSpeed());
-    if (!getIsSorting()) return;
-
     if (start === 0 && end === bars.length - 1) {
         bars.forEach(b => b.style.backgroundColor = 'var(--success)');
         highlight(-1);
@@ -108,10 +104,6 @@ async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start,
         leftBar.style.backgroundColor = 'var(--accent-color)';
         rightBar.style.backgroundColor = 'var(--accent-color)';
 
-        highlight(19);
-        await delay(getSpeed());
-        if (!getIsSorting()) return;
-
         highlight(20);
         k++;
         await delay(getSpeed());
@@ -172,7 +164,6 @@ async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start,
         bar.style.backgroundColor = 'var(--accent-color)';
     }
 
-    highlight(32);
     for (let x = start; x <= end; x++) bars[x].style.backgroundColor = 'var(--success)';
     await delay(getSpeed());
     if (!getIsSorting()) return;
