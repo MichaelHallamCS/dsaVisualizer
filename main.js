@@ -151,7 +151,7 @@ startBtn.onclick = async () => {
         await mergeSort(
             bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
     } else if (currentAlgo === 'quick') {
-        await quickSort(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine);
+        await quickSort(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
     }
     
     isSorting = false;
