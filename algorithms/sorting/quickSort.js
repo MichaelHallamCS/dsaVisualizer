@@ -1,4 +1,4 @@
-export async function quickSort (bars, delay, getIsSorting, getSpeed, highlight, arr, low = 0, high = arr.length - 1) {
+export async function quickSort(bars, delay, getIsSorting, getSpeed, highlight, arr, low = 0, high = arr.length - 1) {
     highlight(0);
     await delay(getSpeed());
     if (!getIsSorting()) return;
@@ -12,66 +12,88 @@ export async function quickSort (bars, delay, getIsSorting, getSpeed, highlight,
         await delay(getSpeed());
         if (!getIsSorting()) return;
         const pi = await partition(bars, delay, getIsSorting, getSpeed, highlight, arr, low, high);
+        if (pi === undefined || !getIsSorting()) return;
 
         highlight(3);
         await delay(getSpeed());
         if (!getIsSorting()) return;
         await quickSort(bars, delay, getIsSorting, getSpeed, highlight, arr, low, pi - 1);
+        if (!getIsSorting()) return;
 
         highlight(4);
         await delay(getSpeed());
         if (!getIsSorting()) return;
         await quickSort(bars, delay, getIsSorting, getSpeed, highlight, arr, pi + 1, high);
+        if (!getIsSorting()) return;
     }
+
     highlight(6);
-    await delay(getSpeed())
+    await delay(getSpeed());
     if (!getIsSorting()) return;
 
     highlight(-1);
 }
 
 async function partition(bars, delay, getIsSorting, getSpeed, highlight, arr, low, high) {
-
     highlight(8);
     await delay(getSpeed());
     if (!getIsSorting()) return;
 
     highlight(9);
-    const pi = arr[high];
-    await delay(getSpeed());
-    if (!getIsSorting()) return;
-    
-    highlight(10);
-    let i = low - 1
+    bars[high].style.backgroundColor = 'var(--warning)';
+    const pivot = arr[high];
     await delay(getSpeed());
     if (!getIsSorting()) return;
 
-    for (let j = low; j < high; j++){
+    highlight(10);
+    let i = low - 1;
+    await delay(getSpeed());
+    if (!getIsSorting()) return;
+
+    for (let j = low; j < high; j++) {
         highlight(11);
+        bars[j].style.backgroundColor = 'var(--danger)';
         await delay(getSpeed());
         if (!getIsSorting()) return;
 
         highlight(12);
         await delay(getSpeed());
         if (!getIsSorting()) return;
-        if (arr[j] <= pi){
+
+        if (arr[j] <= pivot) {
             i++;
             highlight(13);
+            bars[i].style.backgroundColor = 'var(--danger)';
             await delay(getSpeed());
             if (!getIsSorting()) return;
-            [arr[j], arr[i]] = [arr[i], arr[j]];
+
             highlight(14);
+            [bars[j].style.height, bars[i].style.height] = [bars[i].style.height, bars[j].style.height];
+            [bars[j].querySelector('span').innerText, bars[i].querySelector('span').innerText] = [bars[i].querySelector('span').innerText, bars[j].querySelector('span').innerText];
+            [arr[j], arr[i]] = [arr[i], arr[j]];
             await delay(getSpeed());
             if (!getIsSorting()) return;
+
+            bars[i].style.backgroundColor = 'var(--accent-color)';
         }
+
+        bars[j].style.backgroundColor = 'var(--accent-color)';
     }
+
     highlight(17);
+    [bars[i + 1].style.height, bars[high].style.height] = [bars[high].style.height, bars[i + 1].style.height];
+    [bars[i + 1].querySelector('span').innerText, bars[high].querySelector('span').innerText] = [bars[high].querySelector('span').innerText, bars[i + 1].querySelector('span').innerText];
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
     await delay(getSpeed());
     if (!getIsSorting()) return;
-    [arr[i+1], arr[high]] = [arr[high], arr[i+1]];
+
+    bars[high].style.backgroundColor = 'var(--accent-color)';
+    bars[i + 1].style.backgroundColor = 'var(--accent-color)';
+
     highlight(18);
     await delay(getSpeed());
     if (!getIsSorting()) return;
+
     return i + 1;
 }
 
@@ -102,3 +124,7 @@ export const quickInfo = {
         "}"
     ]
 }
+
+
+//turn green when in correct spot
+// validate bar highlighting matches code highlighting
