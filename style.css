@@ -8,6 +8,11 @@
     --success: #22c55e;
     --danger: #ef4444;
     --warning: #eab308;
+    --pivot: #a855f7;
+    --pointer-i: #facc15;
+    --pointer-j: #fb923c;
+    --merge-left: #fb923c;
+    --merge-right: #2dd4bf;
 }
 
 * {
@@ -205,6 +210,29 @@ header h1 {
 input[type="range"] {
     cursor: pointer;
     accent-color: var(--accent-color);
+}
+
+.key{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 18px;
+    
+}
+
+.key-item{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-dim)
+}
+
+.key-swatch{
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
 }
 
 .summary-box {

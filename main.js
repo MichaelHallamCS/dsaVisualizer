@@ -8,11 +8,49 @@ const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const speedSlider = document.getElementById('speed-slider');
 const codeRoot = document.getElementById('code-root');
+const keyElement = document.getElementById('key')
 
 let currentAlgo = null;
 let isSorting = false;
 
 const FIXED_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
+const keys = {
+    quick: [
+        {color: 'var(--accent-color)', label: 'Unsorted' },
+        { color: 'var(--pivot)',        label: 'Pivot' },
+        { color: 'var(--pointer-i)',    label: 'i' },
+        { color: 'var(--pointer-j)',    label: 'j' },
+        { color: 'var(--danger)',       label: 'Swapping' },
+        { color: 'var(--success)',      label: 'Sorted' }
+    ], 
+    bubble: [
+        { color: 'var(--accent-color)', label: 'Unsorted' },
+        { color: 'var(--danger)',       label: 'Comparing / Swapping' },
+        { color: 'var(--success)',      label: 'Sorted' }
+    ],
+    selection: [
+        { color: 'var(--accent-color)', label: 'Unsorted' },
+        { color: 'var(--warning)',      label: 'Current Min' },
+        { color: 'var(--danger)',       label: 'Comparing / Swapping' },
+        { color: 'var(--success)',      label: 'Sorted' }
+    ],
+    merge: [
+    { color: 'var(--accent-color)', label: 'Unsorted' },
+    { color: 'var(--merge-left)',   label: 'Left Half' },
+    { color: 'var(--merge-right)',  label: 'Right Half' },
+    { color: 'var(--danger)',       label: 'Comparing / Swapping' },
+    { color: 'var(--success)',      label: 'Sorted' }
+]
+}
+
+function renderKey(algoId) {
+    keyElement.innerHTML = (keys[algoId] || [])
+    .map(({color, label}) => `
+            <div class="key-item">
+                <span class="key-swatch" style="background-color: ${color}"></span>${label}
+            </div>`)
+        .join('');
+}
 
 /**
  * Helper: Sleep function using Promises
@@ -120,7 +158,7 @@ window.selectAlgo = (algoId) => {
         .join('');
         generateBars();
     }
-    
+    renderKey(algoId);
 };
 
 

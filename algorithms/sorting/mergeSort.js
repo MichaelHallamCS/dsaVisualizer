@@ -39,7 +39,8 @@ export async function mergeSort(bars, delay, getIsSorting, getSpeed, highlight, 
 }
 
 async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start, mid, end) {
-    for (let x = start; x <= end; x++) bars[x].style.backgroundColor = 'var(--accent-color)';
+    for (let x = start; x <= mid; x++) bars[x].style.backgroundColor = 'var(--merge-left)';
+    for (let x = mid + 1; x <= end; x++) bars[x].style.backgroundColor = 'var(--merge-right)';
 
     highlight(8);
     await delay(getSpeed());
@@ -101,13 +102,11 @@ async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start,
             if (!getIsSorting()) return;
         }
 
-        leftBar.style.backgroundColor = 'var(--accent-color)';
-        rightBar.style.backgroundColor = 'var(--accent-color)';
-
         highlight(20);
         k++;
         await delay(getSpeed());
         if (!getIsSorting()) return;
+
     }
 
     while (true) {
@@ -154,27 +153,24 @@ async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start,
         if (!getIsSorting()) return;
     }
 
+    for (let x = start; x <= end; x++) bars[x].style.backgroundColor = 'var(--accent-color)';
+
     for (let x = 0; x < merged.length; x++) {
         const bar = bars[start + x];
         bar.style.backgroundColor = 'var(--danger)';
         arr[start + x] = merged[x];
-        setBar(bar, merged[x]);
+        bar.style.height = `${merged[x]}%`;
+        bar.querySelector('span').innerText = merged[x];
         await delay(getSpeed());
         if (!getIsSorting()) return;
-        bar.style.backgroundColor = 'var(--accent-color)';
+        bar.style.backgroundColor = 'var(--success)';
     }
 
-    for (let x = start; x <= end; x++) bars[x].style.backgroundColor = 'var(--success)';
     await delay(getSpeed());
     if (!getIsSorting()) return;
     bars[mid].style.marginRight = '0px';
 }
 
-function setBar(bar, value) {
-    bar.style.height = `${value}%`;
-    bar.querySelector('span').innerText = value;
-}
-        
 
 export const mergeInfo = {
     title: "Merge Sort",
