@@ -15,7 +15,11 @@ const keyElement = document.getElementById('key')
 let currentAlgo = null;
 let isSorting = false;
 
-const FIXED_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
+const SORTING_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
+const SEARCHING_ARRAY = [12, 18, 25, 34, 42, 49, 55, 63, 71, 78, 84, 89, 93, 97, 100];
+const SORTING_ALGS = ['bubble', 'selection', 'merge', 'quick', 'heap-sort'];
+const SEARCHING_ALGS = ['linear', 'binary', 'bfs', 'dfs', 'dijkstra'];
+const DATA_STRUCTURES = ['array', 'linked-list', 'stack', 'queue', 'hashmap', 'heap', 'bst']
 const keys = {
     quick: [
         {color: 'var(--accent-color)', label: 'Unsorted' },
@@ -78,8 +82,9 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  * Renders the bar chart based on an array
  * @param {Array} arr - The data to visualize
  */
-function generateBars(arr = FIXED_ARRAY) {
+function generateBars(arr) {
     canvas.innerHTML = '';
+    canvas.style.padding = '2rem 2rem 0px 2rem';
     arr.forEach(value => {
         const bar = document.createElement('div');
         bar.style.height = `${value}%`;
@@ -95,7 +100,7 @@ function generateBars(arr = FIXED_ARRAY) {
     });
 }
 
-function generateTree(arr = FIXED_ARRAY) {
+function generateTree(arr) {
     canvas.innerHTML = '';
 
     const n = arr.length;
@@ -242,7 +247,7 @@ window.selectAlgo = (algoId) => {
             .map(line => `<div class="code-line">${line}</div>`)
             .join('');
             
-        generateBars();
+        generateBars(SORTING_ARRAY);
     } else if (algoId === 'selection'){
         currentAlgo = 'selection';
         document.getElementById('algo-title').innerText = selectionInfo.title;
@@ -255,7 +260,7 @@ window.selectAlgo = (algoId) => {
         codeRoot.innerHTML = selectionInfo.codeArr
             .map(line => `<div class="code-line">${line}</div>`)
             .join('');
-        generateBars();
+        generateBars(SORTING_ARRAY);
     } else if (algoId === 'merge'){
         currentAlgo = 'merge';
         document.getElementById('algo-title').innerText = mergeInfo.title;
@@ -268,7 +273,7 @@ window.selectAlgo = (algoId) => {
         codeRoot.innerHTML = mergeInfo.codeArr
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
-        generateBars();
+        generateBars(SORTING_ARRAY);
     } else if (algoId === 'quick'){
         currentAlgo = 'quick';
         document.getElementById('algo-title').innerText = quickInfo.title;
@@ -281,7 +286,7 @@ window.selectAlgo = (algoId) => {
         codeRoot.innerHTML = quickInfo.codeArr
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
-        generateBars();
+        generateBars(SORTING_ARRAY);
     } else if (algoId === 'heap-sort'){
         currentAlgo = 'heap-sort';
         document.getElementById('algo-title').innerText = heapInfo.title;
@@ -294,7 +299,7 @@ window.selectAlgo = (algoId) => {
         codeRoot.innerHTML = heapInfo.codeArr
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
-        generateTree()
+        generateTree(SORTING_ARRAY)
     } else if (algoId === 'linear'){
         currentAlgo = 'linear';
         document.getElementById('algo-title').innerText = linearInfo.title;
@@ -307,7 +312,7 @@ window.selectAlgo = (algoId) => {
         codeRoot.innerHTML = linearInfo.codeArr
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
-        generateBars();
+        generateBars(SEARCHING_ARRAY);
     }
     renderKey(algoId);
 };
@@ -338,16 +343,16 @@ startBtn.onclick = async () => {
         );
     } else if (currentAlgo === 'merge') {
         await mergeSort(
-            bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
+            bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SORTING_ARRAY]);
     } else if (currentAlgo === 'quick') {
-        await quickSort(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
+        await quickSort(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SORTING_ARRAY]);
     } else if (currentAlgo === 'heap-sort') {
         const nodes = document.querySelectorAll('.tree-node');
         const cells = document.querySelectorAll('.heap-cell');
-        await heapSort(nodes, cells, sleep, () => isSorting, () => (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY])
+        await heapSort(nodes, cells, sleep, () => isSorting, () => (1100 - speedSlider.value), highlightLine, [...SORTING_ARRAY])
     }
     else if (currentAlgo === 'linear'){
-        await linearSearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
+        await linearSearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SEARCHING_ARRAY]);
     }
     
     isSorting = false;
@@ -355,6 +360,11 @@ startBtn.onclick = async () => {
 
 resetBtn.onclick = () => {
     isSorting = false;
-    currentAlgo === 'heap-sort' ? generateTree(): generateBars();
+    if (SORTING_ALGS.includes(currentAlgo)){
+        currentAlgo === 'heap-sort' ? generateTree(SORTING_ARRAY): generateBars(SORTING_ARRAY);
+    } 
+    else if (SEARCHING_ALGS.includes(currentAlgo)){
+        generateBars(SEARCHING_ARRAY);
+    }
     highlightLine(-1);
 };

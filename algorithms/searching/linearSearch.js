@@ -5,8 +5,8 @@ async function step(ctx, line) {
 }
 
 export async function linearSearch (bars, delay, getIsSorting, getSpeed, highlight, arr){
-    let target = 70;
-    bars[7].style.backgroundColor = 'var(--warning)';
+    let target = 78;
+    bars[arr.indexOf(target)].style.backgroundColor = 'var(--warning)';
     const ctx = {bars, delay, getIsSorting, getSpeed, highlight, arr};
     if (!await step(ctx, 0)) return;
     for (let i = 0; i < arr.length; i++){
