@@ -4,6 +4,7 @@ import {mergeSort, mergeInfo} from './algorithms/sorting/mergeSort.js';
 import {quickSort, quickInfo} from './algorithms/sorting/quickSort.js';
 import {heapSort, heapInfo} from './algorithms/sorting/heapSort.js';
 import {linearSearch, linearInfo} from './algorithms/searching/linearSearch.js';
+import {binarySearch, binaryInfo} from './algorithms/searching/binarySearch.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -58,6 +59,16 @@ const keys = {
     linear: [
     { color: 'var(--accent-color)', label: 'Default' },
     { color: 'var(--danger)',       label: 'Checking' },
+    { color: 'var(--warning)',      label: 'Target' },
+    {color: 'var(--success)',       label: 'Found'}
+    ],
+    binary: [
+    { color: 'var(--accent-color)', label: 'Default' },
+    { color: 'var(--text-dim)',     label: 'Discarded' },
+    { color: 'var(--danger)',       label: 'Checking' },
+    { color: 'var(--merge-left)',   label: 'Left' },
+    { color: 'var(--pivot)',        label: 'Mid' },
+    { color: 'var(--merge-right)',  label: 'Right' },
     { color: 'var(--warning)',      label: 'Target' },
     {color: 'var(--success)',       label: 'Found'}
     ]
@@ -313,7 +324,21 @@ window.selectAlgo = (algoId) => {
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
         generateBars(SEARCHING_ARRAY);
+    } else if (algoId === 'binary'){
+        currentAlgo = 'binary';
+        document.getElementById('algo-title').innerText = binaryInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+        <p>${binaryInfo.description}</p>
+           <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${binaryInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = binaryInfo.codeArr
+        .map(line => `<div class = "code-line">${line}</div>`)
+        .join('');
+        generateBars(SEARCHING_ARRAY);
     }
+    
     renderKey(algoId);
 };
 
@@ -353,6 +378,9 @@ startBtn.onclick = async () => {
     }
     else if (currentAlgo === 'linear'){
         await linearSearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SEARCHING_ARRAY]);
+    }
+    else if (currentAlgo === 'binary'){
+        await binarySearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SEARCHING_ARRAY]);
     }
     
     isSorting = false;

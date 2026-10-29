@@ -101,9 +101,11 @@ header h1 {
 .visualizer-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    height: 400px;
+    grid-template-rows: 1fr auto;
+    column-gap: 1.5rem;
+    row-gap: 0.75rem;
+    margin-bottom: 1rem;
+    height: 500px;
 }
 
 #visualizer-canvas {
@@ -157,14 +159,13 @@ header h1 {
 }
 
 .controls {
-    padding-bottom: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
 }
 
 .controls-wrapper {
     display: flex;
-    width: 100%;
+    align-items: center;
     justify-content: center;
     gap: 20px;
 }
@@ -172,6 +173,8 @@ header h1 {
 .control-buttons {
     display: flex;
     gap: 12px;
+    align-items: center;
+    justify-content: center;
 }
 
 .controls button {
@@ -224,7 +227,7 @@ input[type="range"] {
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: var(--text-dim)
+    color: var(--text-dim);
 }
 
 .key-swatch{
@@ -238,7 +241,6 @@ input[type="range"] {
     padding: 1.5rem;
     border-radius: 12px;
     border-left: 4px solid var(--accent-color);
-    margin-top: 1rem;
 }
 
 .content-info{
