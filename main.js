@@ -3,6 +3,7 @@ import {selectionSort, selectionInfo} from './algorithms/sorting/selectionSort.j
 import {mergeSort, mergeInfo} from './algorithms/sorting/mergeSort.js';
 import {quickSort, quickInfo} from './algorithms/sorting/quickSort.js';
 import {heapSort, heapInfo} from './algorithms/sorting/heapSort.js';
+import {linearSearch, linearInfo} from './algorithms/searching/linearSearch.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -49,7 +50,13 @@ const keys = {
     { color: 'var(--warning)',      label: 'Current Largest' },
     { color: 'var(--danger)',       label: 'Swapping' },
     { color: 'var(--success)',      label: 'Sorted' }
-]
+    ],
+    linear: [
+    { color: 'var(--accent-color)', label: 'Default' },
+    { color: 'var(--danger)',       label: 'Checking' },
+    { color: 'var(--warning)',      label: 'Target' },
+    {color: 'var(--success)',       label: 'Found'}
+    ]
 }
 
 function renderKey(algoId) {
@@ -288,6 +295,19 @@ window.selectAlgo = (algoId) => {
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
         generateTree()
+    } else if (algoId === 'linear'){
+        currentAlgo = 'linear';
+        document.getElementById('algo-title').innerText = linearInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+        <p>${linearInfo.description}</p>
+           <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${linearInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = linearInfo.codeArr
+        .map(line => `<div class = "code-line">${line}</div>`)
+        .join('');
+        generateBars();
     }
     renderKey(algoId);
 };
@@ -325,6 +345,9 @@ startBtn.onclick = async () => {
         const nodes = document.querySelectorAll('.tree-node');
         const cells = document.querySelectorAll('.heap-cell');
         await heapSort(nodes, cells, sleep, () => isSorting, () => (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY])
+    }
+    else if (currentAlgo === 'linear'){
+        await linearSearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...FIXED_ARRAY]);
     }
     
     isSorting = false;
