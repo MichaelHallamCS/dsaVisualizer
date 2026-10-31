@@ -65,7 +65,6 @@ const keys = {
     binary: [
     { color: 'var(--accent-color)', label: 'Default' },
     { color: 'var(--text-dim)',     label: 'Discarded' },
-    { color: 'var(--danger)',       label: 'Checking' },
     { color: 'var(--merge-left)',   label: 'Left' },
     { color: 'var(--pivot)',        label: 'Mid' },
     { color: 'var(--merge-right)',  label: 'Right' },
