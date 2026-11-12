@@ -5,6 +5,7 @@ import {quickSort, quickInfo} from './algorithms/sorting/quickSort.js';
 import {heapSort, heapInfo} from './algorithms/sorting/heapSort.js';
 import {linearSearch, linearInfo} from './algorithms/searching/linearSearch.js';
 import {binarySearch, binaryInfo} from './algorithms/searching/binarySearch.js';
+import { breadthFirstSearch, bfsInfo } from './algorithms/searching/bfs.js';
 
 const canvas = document.getElementById('visualizer-canvas');
 const startBtn = document.getElementById('start-btn');
@@ -65,6 +66,12 @@ const keys = {
     binary: [
     { color: 'var(--accent-color)', label: 'Default' },
     { color: 'var(--text-dim)',     label: 'Discarded' },
+    { color: 'var(--warning)',      label: 'Target' },
+    {color: 'var(--success)',       label: 'Found'}
+    ],
+    bfs: [
+    { color: 'var(--accent-color)', label: 'Default' },
+    { color: 'var(--danger)',       label: 'Checking' },
     { color: 'var(--warning)',      label: 'Target' },
     {color: 'var(--success)',       label: 'Found'}
     ]
@@ -333,6 +340,19 @@ window.selectAlgo = (algoId) => {
         .map(line => `<div class = "code-line">${line}</div>`)
         .join('');
         generateBars(SEARCHING_ARRAY);
+    } else if (algoId === 'bfs'){
+        currentAlgo = 'bfs';
+        document.getElementById('algo-title').innerText = bfsInfo.title;
+        document.querySelector('.content-info').innerHTML = `
+        <p>${bfsInfo.description}</p>
+            <p style="margin-top: 10px; color: var(--accent-color); font-weight: bold;">
+                Complexity: ${bfsInfo.bigO}
+            </p>
+        `;
+        codeRoot.innerHTML = bfsInfo.codeArr
+        .map(line => `<div class = "code-line">${line}</div>`)
+        .join('');
+        generateTree(SEARCHING_ARRAY)
     }
     
     renderKey(algoId);
@@ -378,6 +398,9 @@ startBtn.onclick = async () => {
     else if (currentAlgo === 'binary'){
         await binarySearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SEARCHING_ARRAY]);
     }
+    else if (currentAlgo === 'bfs'){
+        await breadthFirstSearch(bars, sleep, ()=> isSorting, ()=> (1100 - speedSlider.value), highlightLine, [...SEARCHING_ARRAY])
+    }
     
     isSorting = false;
 };
@@ -388,7 +411,7 @@ resetBtn.onclick = () => {
         currentAlgo === 'heap-sort' ? generateTree(SORTING_ARRAY): generateBars(SORTING_ARRAY);
     } 
     else if (SEARCHING_ALGS.includes(currentAlgo)){
-        generateBars(SEARCHING_ARRAY);
+        currentAlgo === 'bfs' ? generateTree(SEARCHING_ARRAY): generateBars(SEARCHING_ARRAY);
     }
     highlightLine(-1);
 };
