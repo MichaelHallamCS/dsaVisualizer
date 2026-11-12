@@ -26,26 +26,19 @@ export async function binarySearch(bars, delay, getIsSorting, getSpeed, highligh
     const ctx = {bars, delay, getIsSorting, getSpeed, highlight, arr};
     if (!await step(ctx, 0)) return;
     let left = 0;
-    bars[left].style.backgroundColor = 'var(--merge-left)';
     if (!await step(ctx, 1)) return;
     let right = arr.length - 1;
-    bars[right].style.backgroundColor = 'var(--merge-right)';
     setPointers(bars, {L: left, R: right});
     if (!await step(ctx, 2)) return;
     if (!await step(ctx, 3)) return;
     while (left <= right) {
-        bars[left].style.backgroundColor = 'var(--merge-left)';
-        bars[right].style.backgroundColor = 'var(--merge-right)';
         const mid = (left + right) >> 1;
-        bars[mid].style.backgroundColor = 'var(--pivot)';
         setPointers(bars, {L: left, M: mid, R: right});
         if (!await step(ctx, 4)) return;
         if (!await step(ctx, 5)) return;
         if (arr[mid] === target) {
             if (!await step(ctx, 6)) return;
             highlight(-1);
-            bars[left].style.backgroundColor = 'var(--accent-color)';
-            bars[right].style.backgroundColor = 'var(--accent-color)';
             bars[mid].style.backgroundColor = 'var(--success)';
             setPointers(bars, {M: mid});
             return;
@@ -60,7 +53,6 @@ export async function binarySearch(bars, delay, getIsSorting, getSpeed, highligh
                 }
             }
             bars[mid].style.backgroundColor = 'var(--text-dim)';
-            bars[left].style.backgroundColor = 'var(--merge-left)';
             setPointers(bars, {L: left, R: right});
         }
         else{
@@ -73,7 +65,6 @@ export async function binarySearch(bars, delay, getIsSorting, getSpeed, highligh
                 }
             }
              if (right >= 0) bars[mid].style.backgroundColor = 'var(--text-dim)';
-            if (left < arr.length) bars[right].style.backgroundColor = 'var(--merge-right)';
             setPointers(bars, {L: left, R: right});
         }
     }
