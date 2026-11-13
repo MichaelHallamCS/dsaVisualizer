@@ -122,7 +122,7 @@ async function heapify(ctx, size, root) {
 
 export const heapInfo = {
     title: "Heap Sort",
-    description: "Heap sort is a comparison based sorting algorithm that first builds a max heap from the array, then repeatedly swaps the largest element (the root) to the end of the array and sifts the new root down to restore the heap, shrinking the heap by one each time.",
+    description: "Heap Sort is a comparison based sorting algorithm that first builds a max heap from the array, then repeatedly swaps the largest element (the root) to the end of the array and sifts the new root down to restore the heap, shrinking the heap by one each time.",
     bigO: "Worst: O(nlogn) | Best: O(nlogn)",
     codeArr: [
         "function heapSort(arr) {",

@@ -174,7 +174,7 @@ async function merge(bars, delay, getIsSorting, getSpeed, highlight, arr, start,
 
 export const mergeInfo = {
     title: "Merge Sort",
-    description: "Merge sort is a divide and conquer algorithm that recursively splits an array into halves until each subarray contains a single element. It then repeatedly merges these smaller subarrays back together in the correct order to produce a fully sorted array.",
+    description: "Merge Sort is a divide and conquer algorithm that recursively splits an array into halves until each subarray contains a single element. It then repeatedly merges these smaller subarrays back together in the correct order to produce a fully sorted array.",
     bigO: "Worst: O(nlogn) | Best: O(nlogn)",
     codeArr: [
         "function mergeSort(arr, start = 0, end = arr.length - 1) {",

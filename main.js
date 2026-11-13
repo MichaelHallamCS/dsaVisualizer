@@ -12,7 +12,7 @@ const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const speedSlider = document.getElementById('speed-slider');
 const codeRoot = document.getElementById('code-root');
-const keyElement = document.getElementById('key')
+const keyElement = document.getElementById('key');
 
 let currentAlgo = null;
 let isSorting = false;
@@ -21,7 +21,7 @@ const SORTING_ARRAY = [60, 25, 85, 45, 15, 95, 35, 70, 50, 10];
 const SEARCHING_ARRAY = [12, 18, 25, 34, 42, 49, 55, 63, 71, 78, 84, 89, 93, 97, 100];
 const SORTING_ALGS = ['bubble', 'selection', 'merge', 'quick', 'heap-sort'];
 const SEARCHING_ALGS = ['linear', 'binary', 'bfs', 'dfs', 'dijkstra'];
-const DATA_STRUCTURES = ['array', 'linked-list', 'stack', 'queue', 'hashmap', 'heap', 'bst']
+const DATA_STRUCTURES = ['array', 'linked-list', 'stack', 'queue', 'hashmap', 'heap', 'bst'];
 const keys = {
     quick: [
         {color: 'var(--accent-color)', label: 'Unsorted' },
@@ -71,9 +71,9 @@ const keys = {
     ],
     bfs: [
     { color: 'var(--accent-color)', label: 'Default' },
+    { color: 'var(--warning)',      label: 'Queued'},
     { color: 'var(--danger)',       label: 'Checking' },
-    { color: 'var(--warning)',      label: 'Target' },
-    {color: 'var(--success)',       label: 'Found'}
+    {color: 'var(--success)',       label: 'Checked'}
     ]
 }
 

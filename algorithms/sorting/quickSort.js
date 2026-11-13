@@ -112,7 +112,7 @@ async function partition(bars, delay, getIsSorting, getSpeed, highlight, arr, lo
 
 export const quickInfo = {
     title: "Quick Sort",
-    description: "Quick sort is a divide and conquer sorting algorithm that sorts an array by picking an element as a pivot and partitioning the remaining elements into two sub arrays based on whether they are smaller or larger than the pivot.",
+    description: "Quick Sort is a divide and conquer sorting algorithm that sorts an array by picking an element as a pivot and partitioning the remaining elements into two sub arrays based on whether they are smaller or larger than the pivot.",
     bigO: "Worst: O(n&sup2;) | Best: O(nlogn)",
     codeArr: [
         "function quickSortInPlace(arr, low = 0, high = arr.length - 1) {",
